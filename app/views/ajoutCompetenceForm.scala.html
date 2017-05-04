@@ -1,0 +1,39 @@
+@(nouvelleCompetenceForm: Form[Competence], collaborateur: Collaborateur, technologies: List[Technologie])
+@import helper._
+@layoutLayer2("SQLi GRHApp | Nouvelle compétence", "listCol") {
+
+@form(routes.Application.ajouterCompetence(collaborateur.getId()), 'class -> "form-horizontal"){
+<fieldset>
+    <legend><span class="glyphicon glyphicon-file"></span>Informations de la compétence</legend>
+    <div class="form-group">
+        @input(nouvelleCompetenceForm("nom") , '_label -> "Compétence : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <input type="text" class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        }
+    </div>
+    <div class="form-group">
+        @input(nouvelleCompetenceForm("niveau") , '_label -> "Niveau : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <input type="number" class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        }
+    </div>
+    <div class="form-group">
+        <label for="nouvelleTech">Nom de la nouvelle technologie : </label>
+        <input type="text" class="form-control" name="nouvelleTech" id="nouvelleTech">
+    </div>
+    <div class="form-group">
+        @input(nouvelleCompetenceForm("technologie.id") , '_label -> "Ou bien, choisissez une de vos technologie : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <select class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+            <option value="-1" selected>Choisissez...</option>
+            @for(t <- technologies){
+            <option value="@t.getId()">@t.getNom()</option>
+            }
+        </select>
+        }
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg">
+            <span class="glyphicon glyphicon-ok"></span> Ajouter la compétence
+        </button>
+    </div>
+    }
+</fieldset>
+}

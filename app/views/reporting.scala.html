@@ -1,0 +1,122 @@
+@(collaborateurs: List[Collaborateur])
+@layoutLayer2("Reporting", "reporting") {
+<div class="row">
+    <div class="col-xs-12">
+
+        @* Tab navigation *@
+
+        <ul class="nav nav-tabs" id="reportingMenuTab">
+            <li class="active" id="evolutionSalaireTab"><a href="#">Evolution de salaire</a></li>
+            <li id="evolutionPosteTab"><a href="#">Evolution de poste</a></li>
+            <li id="matriceCompetencesTab"><a href="#">Matrice des compétences</a></li>
+            <li id="autresTab"><a href="#">Autres rapport</a></li>
+        </ul>
+        <br>
+
+        @* Formulaire de la génération du rapport d'évolution de salaire *@
+
+        <form method="post" action='@routes.Application.evolutionSalaire()' id="evolutionSalaireForm">
+            <div class="form-group">
+                <label for="collaborateur">Choisissez un collaborateur : </label>
+                <select class="form-control" name="collaborateur" id="collaborateur" required="required">
+                    @for(c <- collaborateurs){
+                    <option value="@c.getId()">@c.getNom @c.getPrenom</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date1">Premère date : </label>
+                <input type="date" class="form-control" name="date1" id="date1" required="required">
+                <span class="help-block">
+                    Choisissez la première date, qui sera utilisé pour calculer le taux d'augemtation dans une période
+                    entre la première date et la dexuième date.
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="date2">Deuxième date : </label>
+                <input type="date" class="form-control" name="date2" id="date2" required="required">
+                <span class="help-block">
+                    Et maintenant, choisissez la deuxième date.
+                </span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" >
+                <span class="glyphicon glyphicon-download-alt"></span> Rapport d'évaluation du salaire
+            </button>
+        </form>
+
+        @* Formulaire de la génération du rapport d'évolution de poste *@
+
+        <form method="post" action='@routes.Application.evolutionPoste()' id="evolutionPosteForm">
+            <div class="form-group">
+                <label for="collaborateur">Choisissez un collaborateur : </label>
+                <select class="form-control" name="collaborateur" id="collaborateur" required="required">
+                    @for(c <- collaborateurs){
+                    <option value="@c.getId()">@c.getNom @c.getPrenom</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" >
+                <span class="glyphicon glyphicon-download-alt"></span> Rapport d'évaluation du poste
+            </button>
+        </form>
+
+        @* Formulaire de la génération du rapport matrice des compétences *@
+
+        <form method="post" action='@routes.Application.matriceDeCompetence()' id="matriceCompetencesForm">
+            <div class="form-group">
+                <label for="collaborateur">Choisissez un collaborateur : </label>
+                <select class="form-control" name="collaborateur" id="collaborateur" required="required">
+                    @for(c <- collaborateurs){
+                    <option value="@c.getId()">@c.getNom @c.getPrenom</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" >
+                <span class="glyphicon glyphicon-download-alt"></span> Rapport matrice des compétences
+            </button>
+        </form>
+        <div id="autresForm">
+            @* Génération du rapport ratio féminin masculin *@
+            <div class="panel panel-default">
+                <div class="panel-heading">Rapport ratio féminin masculin</div>
+                <div class="panel-body">
+                    <p>Générer un rapport ratio féminin masculin, contenant le nombre d'éffectifs féminin, et masculin.
+                    (Un tableau + graphe) </p>
+                    <a class="btn btn-primary btn-lg" href='@routes.Application.ratioFemininMasculin()' role="button">
+                        <span class="glyphicon glyphicon-download-alt"></span> Rapport ratio féminin masculin
+                    </a>
+                </div>
+            </div>
+
+
+            @* Génération du rapport d'évolution de recrutement par année *@
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Rapport d'évolution de recrutement par année</div>
+                <div class="panel-body">
+                    <p>Générer un rapport d'évolution de recrutement par année, contenant un graphe montrant les
+                     nouveaux recrutés de chaque année.</p>
+                    <a class="btn btn-primary btn-lg" href='@routes.Application.nouveauxRecrus()' role="button">
+                        <span class="glyphicon glyphicon-download-alt"></span> Rapport ratio féminin masculin
+                    </a>
+                </div>
+            </div>
+
+
+            @* Génération du rapport de pourcentage des téchnologies *@
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Rapport de pourcentage des technologies</div>
+                <div class="panel-body">
+                    <p>Générer un rapport de pourcentage des technologie, contenant un graphe montrant les
+                    technologies et la part de chaque technologie dans l'entreprise.</p>
+                    <a class="btn btn-primary btn-lg" href='@routes.Application.pourcentageTechnologies()' role="button">
+                        <span class="glyphicon glyphicon-download-alt"></span> Rapport ratio féminin masculin
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src='@routes.Assets.at("javascripts/reportingTabs.js")'></script>
+}

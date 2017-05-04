@@ -1,0 +1,38 @@
+@(editerCompetenceForm: Form[Competence], competence: Competence, technologies: List[Technologie])
+@import helper._
+@layoutLayer2("Editer une compétence", "listCol") {
+
+@form(routes.Application.majCompetence(competence.getId()), 'class -> "form-horizontal"){
+<fieldset>
+    <legend><span class="glyphicon glyphicon-file"></span> Informations de la compétence</legend>
+    <div class="form-group">
+        @input(editerCompetenceForm("nom") , '_label -> "Compétence : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <input type="text" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        }
+    </div>
+    <div class="form-group">
+        @input(editerCompetenceForm("niveau") , '_label -> "Niveau : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <input type="number" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        }
+    </div>
+    <div class="form-group">
+        <label for="nouvelleTech">Nom de la nouvelle technologie : </label>
+        <input type="text" class="form-control" name="nouvelleTech" id="nouvelleTech">
+    </div>
+    <div class="form-group">
+        @input(editerCompetenceForm("technologie.id") , '_label -> "Technologie : ", '_showConstraints -> false) { (id, name, value, args) =>
+            <select class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+                @for(t <- technologies){
+                <option value="@t.getId()" @if(t.getId()==competence.getTechnologie().getId()){selected}>@t.getNom()</option>
+            }
+            </select>
+        }
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg">
+            <span class="glyphicon glyphicon-ok"></span> Modifier la compétence
+        </button>
+    </div>
+    }
+</fieldset>
+}

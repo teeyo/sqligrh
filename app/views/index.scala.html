@@ -1,0 +1,47 @@
+@layout("Accueil") {
+<header>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="jumbotron">
+                <h1>SQLiGRH<span class="glyphicon glyphicon-briefcase"></span></h1>
+                <p>
+                    SQLiGRH est une application web de gestion des collaborateurs.
+                </p>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <form method="post" class="form-horizontal">
+                <fieldset>
+                    <legend><span class="glyphicon glyphicon-log-in"></span> Se connecter</legend>
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <label for="email">E-mail :</label>
+                        <input type="email" placeholder="tapez votre e-mail" name="email" class="form-control" id="email">
+                    </div>
+                    <div class="form-group">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        <label for="motDePasse">Mot de passe : </label>
+                        <input type="password" placeholder="tapez votre mot de passe" class="form-control" name="motDePasse" id="motDePasse">
+                    </div>
+                    <input type="submit" value="S'authentifier" class="btn btn-primary btn-lg">
+                    <p><a href="#">Mot de passe oublié?</a></p>
+                </fieldset>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                @if(flash.containsKey("success")) {
+                <div class="alert alert-success">
+                    <strong>Succès ! </strong> @flash.get("success")
+                </div>
+                }
+                @if(flash.containsKey("error")) {
+                <div class="alert alert-danger">
+                    <strong>Erreur !</strong> @flash.get("error")
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</header>
+}

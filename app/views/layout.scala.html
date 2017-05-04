@@ -1,0 +1,36 @@
+@(title: String)(content: Html)
+<!DOCTYPE html>
+<HTML lang="fr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" media="screen" href='@routes.Assets.at("stylesheets/bootstrap.min.css")'/>
+        <link rel="stylesheet" type="text/css" media="screen" href='@routes.Assets.at("stylesheets/main.css")'/>
+        <title>SQLiGRH | @title</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href='@routes.Application.index()'>
+                    SQLiGRH<span class="glyphicon glyphicon-briefcase"></span>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href='@routes.Application.index()'>
+                        <span class="glyphicon glyphicon-home"></span> Accueil</a>
+                    </li>
+                    <li><a href='@routes.Application.magicalAdd()'>
+                        <span class="glyphicon glyphicon-star"></span> Let the show begin</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+        <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery-1.9.0.min.js")'></script>
+        <div class="container well">
+        @content
+        </div>
+    </body>
+</HTML>

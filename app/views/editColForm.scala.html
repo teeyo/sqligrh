@@ -1,0 +1,146 @@
+@(collaborateur: Collaborateur, editionForm: Form[Collaborateur], managersRH: List[Collaborateur], roles: List[Role], utilisateur: Collaborateur)
+@import helper._
+@layoutLayer2("SQLi GRHApp | S'authentifier", "listCol") {
+@form(routes.Application.majCol(collaborateur.getId()), 'class -> "form-horizontal") {
+
+<fieldset>
+    <div class="form-group">
+        @input(editionForm("matricule") , '_label -> "Matricule : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="number" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Le matricule du collaborateur est un entier de 5 chiffres, exemple : 10999 (obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionForm("nom") , '_label -> "Nom : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="text" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">(obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionForm("prenom") , '_label -> "Prénom : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="text" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">(obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @inputRadioGroup(
+        editionForm("sexe"),
+        options = options("M"->"Masculin","F"->"Féminin"),
+        '_label -> "Sexe : ", '_showConstraints -> false, '_showErrors -> false)
+        <span class="help-block">(obligatoire)</span>
+    </div>
+    <div class="form-group">
+        @input(editionForm("site") , '_label -> "Site : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="text" placeholder="exemple : Rabat" value="@value" class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Le matricule du collaborateur se compose de 5 chiffres, exemple : 10000 (optionnel)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionForm("bu") , '_label -> "BU : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="text" placeholder="Business Unite" value="@value" class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Champs composé de quatre lettres. (obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionForm("dateEmbauche") , '_label -> "Date d'embauche : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="date" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Format de la date : "jj/mm/aaaa" (obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionForm("ancienCollaborateur") , '_label -> "Ancien collaborateur : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="checkbox" class="form-control" value="true" name="@name" id="@id"
+        @if(collaborateur.isAncienCollaborateur()){checked}    @toHtmlArgs(args)>
+        <span class="help-block">A cocher si le collaborateur ne travail plus pour l'entreprise (optionnel)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionForm("dateDepart") , '_label -> "Date de départ : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="date" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Format de la date : "jj/mm/aaaa" (optionnel)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionForm("participeAuSiminaire") , '_label -> "A participé au siminaire : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="checkbox" class="form-control" value="true" name="@name" id="@id"
+        @if(collaborateur.isParticipeAuSiminaire()){checked}    @toHtmlArgs(args)>
+        <span class="help-block">A cocher si le collaborateur a déjà particpé au siminaire. (optionnel)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionForm("dateParticipation") , '_label -> "Date de participation au siminaire : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="date" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Format de la date : "jj/mm/aaaa" (optionnel)</span>
+        }
+    </div>
+    <div class="form-group" @if(utilisateur.getRole.getDescription().equals("Manager RH")){hidden}>
+        @input(editionForm("posteNiveauApp") , '_label -> "Poste niveau APP : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="text" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Champ composé de trois lettres. (obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionForm("posteActuel") , '_label -> "Poste actuel : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="text" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Champs composé de quatre lettres. (obligatoire)</span>
+        }
+    </div>
+    <div class="form-group" @if(utilisateur.getRole.getDescription().equals("Manager RH")){hidden}>
+        @input(editionForm("salaireActuel") , '_label -> "Salaire actuel : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="number" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">(obligatoire)</span>
+        }
+    </div>
+    <div class="form-group" @if(utilisateur.getRole.getDescription().equals("Manager RH")){hidden}>
+        @input(editionForm("managerActuel.id") , '_label -> "Manager RH actuel : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <select class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        <option value="-1" default>Choisissez un manager</option>
+        <option value="-2">Supprimer le manager actuel pour ce collaborateur</option>
+        @for(m <- managersRH){
+        <option value="@m.getId()"
+        @if(collaborateur.getManagerActuel() != null){
+            @if(collaborateur.getManagerActuel().getId() == m.getId()){selected}
+        }
+        >@m.getNom()</option>
+        }
+        </select>
+        }
+        <span class="help-block">Choisissez le manager actuel du collaborateur. (optionnel)</span>
+    </div>
+</fieldset>
+<fieldset>
+    <legend><span class="glyphicon glyphicon-lock"></span> Compte</legend>
+    <div class="form-group">
+        @input(editionForm("compte.email") , '_label -> "E-mail : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="email" value="@value"  class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">(obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionForm("compte.motDePasse") , '_label -> "Mot de passe : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <input type="password" class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">(obligatoire)</span>
+        }
+    </div>
+    </fieldset>
+<fieldset>
+    <legend><span class="glyphicon glyphicon-tower"></span> Rôle</legend>
+    <div class="form-group">
+        @input(editionForm("role.id") , '_label -> "Rôle de du collaborateur : ", '_showConstraints -> false, '_showErrors -> false) { (id, name, value, args) =>
+        <select class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        @for(r <- roles){
+        <option value="@r.getId()" @if(collaborateur.getRole().getId() == r.getId()){ selected }>@r.getDescription()</option>
+        }
+        </select>
+        <span class="help-block">Choisissez le rôle du collaborateur. (obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg">
+            <span class="glyphicon glyphicon-saved"> Enregistrer les modification</span>
+        </button>
+    </div>
+</fieldset>
+}
+<script type="text/javascript" src='@routes.Assets.at("javascripts/checkboxChecker.js")'></script>
+}

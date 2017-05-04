@@ -1,0 +1,1 @@
+web: target/universal/stage/bin/sqligrh -Dhttp.port=$PORT -DapplyEvolutions.default=true -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL} -Ddb.default.user=lfdflaojqzcpha -Ddb.default.password=UDQ2LrLv0OmluIbSNobTrEO9iP

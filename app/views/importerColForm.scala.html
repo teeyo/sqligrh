@@ -1,0 +1,53 @@
+@layoutLayer2("Importer la liste des collaborateurs", "import") {
+<div class="row">
+    <div class="col-xs-12">
+
+        <h1>Importer la liste des collaborateurs</h1>
+        <p>Cliquez sur le boutton pour charger la liste des collaborateurs depuis un fichier Excel.</p>
+        <form enctype="multipart/form-data" method="post" action='@routes.Application.importerCollaborateurs()'>
+            <div class="form-group">
+                <label for="excel">Fichier Excel d'importation : </label>
+                <input type="file" class="form-control" name="excel" id="excel"
+                       accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" >
+                <span class="glyphicon glyphicon-upload"></span> Importer la liste des collaborateurs
+            </button>
+        </form>
+
+        <h1>Téléchargement d'un modèle</h1>
+        <p>Vous pouvez télécharger un modèle de fichier Excel que vous pouvez remplir, c'est un fichier structuré afin
+            de permettre une importation réussite. <em>Les entêtes des colonnes sont commentés (le type de données
+                que vous devez saisir, plus si la donnée est obligatoire ou non.</em></p>
+
+
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src='@routes.Assets.at("images/excel2003.png")' alt="Modèle Excel 97-2003">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">Télécharger le modèle Excel 97-2003</h4>
+                <p>Ce modèle est pour l'Excel 97-2003, ayant l'extention xls.</p>
+                <a href='@routes.Assets.at("models/excel2003.xls")' role="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-download-alt"></span> Télécharger ce modèle
+                </a>
+            </div>
+        </div>
+
+
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src='@routes.Assets.at("images/excel2013.png")' alt="Modèle Excel 97-2003">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">Télécharger le modèle Excel 2007+</h4>
+                <p>Ce modèle est pour l'Excel 2007, 2010, 2013, etc..., ayant l'extention xlsx.</p>
+                <a href='@routes.Assets.at("models/excel2013.xlsx")' role="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-download-alt"></span> Télécharger ce modèle
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+}

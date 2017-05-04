@@ -1,0 +1,12 @@
+html, body {
+    background-color : #D74B4B;
+}
+body {
+    padding-top: 50px;
+}
+.container {
+    background-color : white;
+}
+td a {
+    text-decoration : none;
+}

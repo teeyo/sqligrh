@@ -1,0 +1,37 @@
+@(technologies: List[Technologie], collaborateur: Collaborateur)
+
+@layoutLayer2("Gestion des technologies", "technologies") {
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Technologies</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @for(t <- technologies){
+                    <tr>
+                        <td>@t.getNom()</td>
+                        <td colspan="2">
+                            <a href='@routes.Application.editerTechnologie(collaborateur.getId(), t.getId())'>
+                                <button class="btn btn-primary btn-sm">
+                                    <span title="Editer" class="glyphicon glyphicon-pencil"></span> Editer
+                                </button>
+                            </a>
+                            <a href='@routes.Application.supprimerTechnologie(collaborateur.getId(), t.getId())'>
+                                <button class="btn btn-danger btn-sm">
+                                    <span title="Supprimer" class="glyphicon glyphicon-trash"></span> Supprimer
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+}

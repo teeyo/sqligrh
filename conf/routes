@@ -1,0 +1,78 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Authentification
+GET     /                           controllers.Application.index()
+POST    /                           controllers.Application.seConnecter()
+GET     /deconnexion                controllers.Application.seDeconnecter()
+
+# Ajout d'un collaborateur
+GET     /collaborateurs/nouveau     controllers.Application.nouveauCol()
+POST    /collaborateurs/nouveau     controllers.Application.ajouterCol()
+
+# Modification d'un collaborateur
+GET     /collaborateurs/:id         controllers.Application.editerCol(id: Long)
+POST    /collaborateurs/:id         controllers.Application.majCol(id: Long)
+
+# Liste des collaborateurs
+GET     /collaborateurs                         controllers.Application.listerCol()
+GET     /collaborateurs/:id/details             controllers.Application.detaillerCol(id: Long)
+
+# Suppression d'un collaborateur
+GET     /collaborateurs/:id/suppression      controllers.Application.supprimerCol(id: Long)
+
+# Ajout d'un admin, à supprimer plutard
+GET     /magicalAdd                          controllers.Application.magicalAdd()
+
+# Ajout des diplomes
+GET     /collaborateurs/:id/diplomes/nouveau     controllers.Application.nouveauDiplome(id: Long)
+POST    /collaborateurs/:id/diplomes/nouveau     controllers.Application.ajouterDiplome(id: Long)
+
+# Modifier un diplôme
+GET     /collaborateurs/:id/diplomes     controllers.Application.editerDiplome(id: Long)
+POST    /collaborateurs/:id/diplomes     controllers.Application.majDiplome(id: Long)
+
+# Supprimer un diplome
+GET    /collaborateurs/:id/diplomes/supprimer     controllers.Application.supprimerDiplome(id: Long)
+
+# Ajouter compétence
+GET     /collaborateurs/:id/competences     controllers.Application.nouvelleCompetence(id: Long)
+POST    /collaborateurs/:id/competences     controllers.Application.ajouterCompetence(id: Long)
+
+# Modification compétence
+GET     /collaborateurs/:id/competences/edition     controllers.Application.editerCompetence(id: Long)
+POST    /collaborateurs/:id/competences/edition     controllers.Application.majCompetence(id: Long)
+
+# Supprimer compétence
+GET     /collaborateurs/:id/competences/suppression     controllers.Application.supprimerCompetence(id: Long)
+
+# Lister les technologies
+GET     /collaborateurs/technologies/     controllers.Application.listerTechnologies()
+
+# Modifier une technologie
+GET     /collaborateurs/:idCol/technologies/:idTech/modification     controllers.Application.editerTechnologie(idCol: Long, idTech: Long)
+POST    /collaborateurs/:idCol/technologies/:idTech/modification     controllers.Application.majTechnologie(idCol: Long, idTech: Long)
+
+# Supprimer une technologie
+GET     /collaborateurs/:idCol/technologies/:idTech/suppression     controllers.Application.supprimerTechnologie(idCol: Long, idTech: Long)
+
+# Exporter excel
+GET     /collaborateurs/excel/export      controllers.Application.exporterCollaborateurs()
+GET     /collaborateurs/excel/            controllers.Application.exportCollaborateurs()
+
+# Importer excel
+GET     /collaborateurs/excel/import      controllers.Application.importCollaborateurs()
+POST    /collaborateurs/excel/import      controllers.Application.importerCollaborateurs()
+
+# Reporting
+GET      /reporting                                   controllers.Application.accueilReporting()
+POST     /reports/evolutionSalaire                    controllers.Application.evolutionSalaire()
+POST     /reports/evolutionPoste                      controllers.Application.evolutionPoste()
+POST     /reports/matriceDeCompetence                 controllers.Application.matriceDeCompetence()
+GET     /reports/ratioFemininMasculin                 controllers.Application.ratioFemininMasculin()
+GET     /reports/nouveauxRecrus                       controllers.Application.nouveauxRecrus()
+GET     /reports/pourcentageTechnologies              controllers.Application.pourcentageTechnologies()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -1,0 +1,62 @@
+@(collaborateurs: List[Collaborateur])
+
+@layoutLayer2("SQLi GRHApp | Nouveau collaborateur", "listCol") {
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Matricule</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Site</th>
+                            <th>BU</th>
+                            <th>Date embauche</th>
+                            <th>Salaire</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(c <- collaborateurs){
+                            <tr>
+                                <td>@c.getMatricule()</td>
+                                <td>@c.getNom()</td>
+                                <td>@c.getPrenom</td>
+                                <td>@c.getSite()</td>
+                                <td>@c.getBu()</td>
+                                <td>@c.getDateEmbauche().format("dd-MM-yyyy")</td>
+                                <td>@c.getSalaireActuel() DH</td>
+                                <td>
+                                    <a href='@routes.Application.detaillerCol(c.getId())'>
+                                        <span title="Détails" class="glyphicon glyphicon-list-alt"></span>
+                                    </a>
+                                    <a href='@routes.Application.editerCol(c.getId())'>
+                                        <span title="Editer" class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                    <a href='@routes.Application.supprimerCol(c.getId())'>
+                                        <span title="Supprimer" class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8">
+                                    <a href='@routes.Application.nouveauDiplome(c.getId())'>
+                                        <button class="btn btn-primary btn-sm">
+                                            <span class="glyphicon glyphicon-plus"></span> Ajouter un diplôme
+                                        </button>
+                                    </a>
+                                    <a href='@routes.Application.nouvelleCompetence(c.getId())'>
+                                        <button class="btn btn-primary btn-sm">
+                                            <span class="glyphicon glyphicon-plus"></span> Ajouter une compétence
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

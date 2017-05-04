@@ -1,0 +1,15 @@
+@(ref: String)
+
+@layoutLayer2("Télécharger la liste des collaborateurs", "export") {
+<div class="row">
+    <div class="col-xs-12">
+
+            <h1>Télécharger la liste des collaborateurs</h1>
+            <p>Cliquez sur le boutton pour télécharger la liste des collaborateurs que vous venez de générer.</p>
+            <p>
+                <a class="btn btn-primary btn-lg" role="button" href='@routes.Assets.at("files/collaborateurs"+ref+".xls")'>
+                    <span class="glyphicon glyphicon-download"></span> Télécharger la liste des collaborateurs
+                </a>
+            </p>
+    </div>
+    }

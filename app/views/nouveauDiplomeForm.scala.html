@@ -1,0 +1,63 @@
+@(diplomeForm: Form[Diplome], collaborateur: Collaborateur)
+@import helper._
+@layoutLayer2("SQLi GRHApp | Nouveau collaborateur", "listCol") {
+
+@form(routes.Application.ajouterDiplome(collaborateur.getId()), 'class -> "form-horizontal"){
+<fieldset>
+    <legend><span class="glyphicon glyphicon-file"></span>Informations du diplôme</legend>
+    <div class="form-group">
+        @input(diplomeForm("intitule") , '_label -> "Intitulé : ", '_showConstraints -> false, '_showErrors -> false){ (id, name, value, args) =>
+        <input type="text" class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Intitulé du diplôme. (Obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(diplomeForm("ecole") , '_label -> "Ecole : ", '_showConstraints -> false, '_showErrors -> false){ (id, name, value, args) =>
+        <input type="text" class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Nom de l'école/établissement d'obtention du diplôme. (Obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(diplomeForm("promotion") , '_label -> "Promotion : ", '_showConstraints -> false, '_showErrors -> false){ (id, name, value, args) =>
+        <input type="text" class="form-control" placeholder="exemple: 2013" name="@name" id="@id" @toHtmlArgs(args)>
+        <span class="help-block">Année d'obtention du diplôme. (Obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(diplomeForm("niveau") , '_label -> "Niveau : ", '_showConstraints -> false, '_showErrors -> false){ (id, name, value, args) =>
+        <select class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        <option value="BAC +1">BAC +1</option>
+        <option value="BAC +2">BAC +2</option>
+        <option value="BAC +3">BAC +3</option>
+        <option value="BAC +4">BAC +4</option>
+        <option value="BAC +5">BAC +5</option>
+        </select>
+        <span class="help-block">Choisissez le niveau correspondant au niveau du diplôme. (Obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(diplomeForm("typeEcole") , '_label -> "Type d'école : ", '_showConstraints -> false, '_showErrors -> false){ (id, name, value, args) =>
+        <select class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+            <option value="Nationale">Nationale</option>
+            <option value="Internationale">Internationale</option>
+        </select>
+        <span class="help-block">Choisissez le type d'établissement d'obtention du diplôme. (Obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        @input(diplomeForm("typeDiplome") , '_label -> "Type du diplôme : ", '_showConstraints -> false, '_showErrors -> false){ (id, name, value, args) =>
+        <select class="form-control" name="@name" id="@id" @toHtmlArgs(args)>
+        <option value="Etatique">Etatique</option>
+        <option value="Privé">Privé</option>
+        </select>
+        <span class="help-block">Choisissez le type du diplôme. (Obligatoire)</span>
+        }
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg">
+            <span class="glyphicon glyphicon-ok"></span> Ajouter le diplôme
+        </button>
+    </div>
+    }
+</fieldset>
+}

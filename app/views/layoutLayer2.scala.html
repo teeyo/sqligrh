@@ -1,0 +1,46 @@
+@(title: String, menuActive: String)(content: Html)
+@layout(title) {
+@if(flash.containsKey("success")) {
+<div class="alert alert-success">
+    <strong>Succès ! </strong> @flash.get("success")
+</div>
+}
+@if(flash.containsKey("error")) {
+<div class="alert alert-danger">
+    <strong>Erreur !</strong> @flash.get("error")
+</div>
+}
+<div class="row">
+    <div class="col-xs-4">
+        <div class="list-group">
+            <a href='@routes.Application.listerCol()' class='list-group-item @if(menuActive.equals("listCol")){active}'>
+                <span class="glyphicon glyphicon-list-alt"></span> Liste des collaborateur
+            </a>
+            <a href='@routes.Application.nouveauCol()' class='list-group-item @if(menuActive.equals("nouveauCol")){active}'>
+                <span class="glyphicon glyphicon-asterisk"></span> Nouveau collaborateur
+            </a>
+            <a href='@routes.Application.exportCollaborateurs()' class='list-group-item @if(menuActive.equals("export")){active}'>
+                <span class="glyphicon glyphicon-export"></span> Exporter la liste des collaborateurs
+            </a>
+            <a href='@routes.Application.importCollaborateurs()' class='list-group-item @if(menuActive.equals("import")){active}'>
+                <span class="glyphicon glyphicon-import"></span> Importer la liste des collaborateurs
+            </a>
+            <a href='@routes.Application.listerTechnologies()' class='list-group-item @if(menuActive.equals("technologies")){active}'>
+                <span class="glyphicon glyphicon-cog"></span> Gérer les technologies
+            </a>
+            <a href='@routes.Application.detaillerCol(session.get("id").toLong)' class="list-group-item">
+                <span class="glyphicon glyphicon-user"></span> Mon profile
+            </a>
+            <a href='@routes.Application.accueilReporting()' class='list-group-item @if(menuActive.equals("reporting")){active}'>
+                <span class="glyphicon glyphicon-stats"></span> Reporting
+            </a>
+            <a href='@routes.Application.seDeconnecter()' class="list-group-item">
+                <span class="glyphicon glyphicon-log-out"></span> Se déconnecter
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-8">
+        @content
+    </div>
+</div>
+}

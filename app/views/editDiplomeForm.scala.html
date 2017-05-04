@@ -1,0 +1,57 @@
+@(editionDipForm: Form[Diplome], diplome: Diplome)
+@import helper._
+@layoutLayer2("SQLi GRHApp | Nouveau collaborateur", "listCol") {
+
+@form(routes.Application.majDiplome(diplome.getId()), 'class -> "form-horizontal"){
+<fieldset>
+    <legend><span class="glyphicon glyphicon-file"></span>Edition du diplôme de @diplome.getCollaborateur().getNom()</legend>
+    <div class="form-group">
+        @input(editionDipForm("intitule") , '_label -> "Intitulé : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <input type="text" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionDipForm("ecole") , '_label -> "Ecole : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <input type="text" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionDipForm("promotion") , '_label -> "Promotion : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <input type="text" class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionDipForm("niveau") , '_label -> "Niveau : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <select class="form-control"  value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <option value="BAC +1" @if(diplome.getNiveau().equals("BAC +1")){selected}>BAC +1</option>
+        <option value="BAC +2" @if(diplome.getNiveau().equals("BAC +2")){selected}>BAC +2</option>
+        <option value="BAC +3" @if(diplome.getNiveau().equals("BAC +3")){selected}>BAC +3</option>
+        <option value="BAC +4" @if(diplome.getNiveau().equals("BAC +4")){selected}>BAC +4</option>
+        <option value="BAC +5" @if(diplome.getNiveau().equals("BAC +5")){selected}>BAC +5</option>
+        </select>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionDipForm("typeEcole") , '_label -> "Type d'école : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <select class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <option value="Nationale" @if(diplome.getTypeEcole().equals("Nationale")){selected}>Nationale</option>
+        <option value="Internationale" @if(diplome.getTypeEcole().equals("Privée")){selected}>Internationale</option>
+        </select>
+        }
+    </div>
+    <div class="form-group">
+        @input(editionDipForm("typeDiplome") , '_label -> "Type du diplôme : ", '_showConstraints -> false) { (id, name, value, args) =>
+        <select class="form-control" value="@value" name="@name" id="@id" @toHtmlArgs(args)>
+        <option value="Etatique" @if(diplome.getTypeDiplome().equals("Etatique")){selected}>Etatique</option>
+        <option value="Privé" @if(diplome.getTypeDiplome().equals("Privé")){selected}>Privé</option>
+        </select>
+        }
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg">
+            <span class="glyphicon glyphicon-ok"></span> Editer le diplôme
+        </button>
+    </div>
+    }
+</fieldset>
+}

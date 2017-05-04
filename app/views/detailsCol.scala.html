@@ -1,0 +1,222 @@
+@(collaborateur: Collaborateur)
+@layoutLayer2("SQLi GRHApp | Détails du collaborateur ", "listCol") {
+<div class="row">
+    <div class="col-xs-12">
+
+    @* Tab navigation *@
+
+    <ul class="nav nav-tabs" id="detailsTab">
+        <li class="active" id="profileTab"><a href="#">Profile</a></li>
+        <li id="diplomesTab"><a href="#">Diplômes</a></li>
+        <li id="competencesTab"><a href="#">Compétences</a></li>
+    </ul>
+    <br>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr class="profile">
+                        <td colspan="2">
+                           <strong><span class="glyphicon glyphicon-file"></span> Informations du collaborateur</strong>
+                        </td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Matricule : </td>
+                        <td><strong>@collaborateur.getMatricule()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Nom : </td>
+                        <td><strong>@collaborateur.getNom().toUpperCase()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Prénom : </td>
+                        <td><strong>@collaborateur.getPrenom().toUpperCase()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Abréviation : </td>
+                        <td><strong>@collaborateur.getAbreviation().toUpperCase()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Sexe : </td>
+                        <td>
+                            <strong>
+                            @if(collaborateur.getSexe().equals('M')){
+                                Masculin
+                            }else{
+                                Féminin
+                            }
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Site : </td>
+                        <td><strong>@collaborateur.getSite()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td>BU : </td>
+                        <td><strong>@collaborateur.getBu()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Date d'embauche : </td>
+                        <td><strong>@collaborateur.getDateEmbauche().format("dd-MM-yyyy")</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Mois BAP : </td>
+                        <td><strong>@collaborateur.getMoisBap().toUpperCase()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Date de départ : </td>
+                        <td>
+                            <strong>
+                            @if(collaborateur.getDateDepart() != null){
+                                @collaborateur.getDateDepart().format("dd-MM-yyyy")
+                            }
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Date de participation au siminaire : </td>
+                        <td>
+                            <strong>
+                            @if(collaborateur.getDateParticipation() != null){
+                                @collaborateur.getDateParticipation().format("dd-MM-yyyy")
+                            }
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Poste niveau APP : </td>
+                        <td><strong>@collaborateur.getPosteNiveauApp()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Poste actuel : </td>
+                        <td><strong>@collaborateur.getPosteActuel()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Salaire : </td>
+                        <td><strong>@collaborateur.getSalaireActuel() DH</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td colspan="2">
+                            <strong><span class="glyphicon glyphicon-envelope"></span> E-mail du collaborateur</strong>
+                        </td>
+                    </tr>
+                    <tr class="profile">
+                        <td>E-mail : </td>
+                        <td><strong>@collaborateur.getCompte().getEmail()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td colspan="2">
+                            <strong><span class="glyphicon glyphicon-tower"></span> Rôle du collaborateur</strong>
+                        </td>
+                    </tr>
+                    <tr class="profile">
+                        <td>Rôle : </td>
+                        <td><strong>@collaborateur.getRole().getDescription()</strong></td>
+                    </tr>
+                    <tr class="profile">
+                        <td colspan="2">
+                            <a href='@routes.Application.editerCol(collaborateur.getId())'>
+                                <button class="btn btn-sm btn-primary">
+                                    <span class="glyphicon glyphicon-pencil"></span> Editer ce collaborateur
+                                </button>
+                            </a>
+                            <a href='@routes.Application.supprimerCol(collaborateur.getId())'>
+                                <button class="btn btn-sm btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span> Supprimer ce collaborateur
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="diplomes">
+                        <td colspan="2">
+                            <strong><span class="glyphicon glyphicon-book"></span> Les diplômes du collaborateur</strong>
+                        </td>
+                    </tr>
+                    @for(d <- collaborateur.getDiplomes()){
+                    <tr class="diplomes">
+                        <td>Intitulé : </td>
+                        <td><strong>@d.getIntitule()</strong></td>
+                    </tr>
+                    <tr class="diplomes">
+                        <td>Ecole : </td>
+                        <td><strong>@d.getEcole()</strong></td>
+                    </tr>
+                    <tr class="diplomes">
+                        <td>Type école :</td>
+                        <td><strong>@d.getTypeEcole()</strong></td>
+                    </tr>
+                    <tr class="diplomes">
+                        <td>Promotion : </td>
+                        <td><strong>@d.getPromotion()</strong></td>
+                    </tr>
+                    <tr class="diplomes">
+                        <td>Niveau : </td>
+                        <td><strong>@d.getNiveau()</strong></td>
+                    </tr>
+                    <tr class="diplomes">
+                        <td>Type diplôme : </td>
+                        <td><strong>@d.getTypeDiplome()</strong></td>
+                    </tr>
+                    <tr class="diplomes">
+                        <td colspan="2">
+                            <a href='@routes.Application.editerDiplome(d.getId())'>
+                                <button class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-pencil"></span> Editer ce diplôme
+                                </button>
+                            </a>
+                            <a href='@routes.Application.supprimerDiplome(d.getId())'>
+                                <button class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span> Supprimer ce diplôme
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                    <tr class="competences">
+                        <td colspan="2">
+                            <strong><span class="glyphicon glyphicon-star"></span> Les compétences du collaborateur</strong>
+                        </td>
+                    </tr>
+                    @for(c <- collaborateur.getCompetences()){
+                    <tr class="competences">
+                        <td>Compétence : </td>
+                        <td><strong>@c.getNom()</strong></td>
+                    </tr>
+                    <tr class="competences">
+                        <td>Niveau : </td>
+                        <td>
+                            @for(i <- 0 until c.getNiveau()){
+                                <span class="glyphicon glyphicon-star"></span>
+                            }
+                            @for(i <- 0 until (5 - c.getNiveau())){
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            }
+                        </td>
+                    </tr>
+                    <tr class="competences">
+                        <td>Technologie : </td>
+                        <td><strong>@c.getTechnologie().getNom()</strong></td>
+                    </tr>
+                    <tr class="competences">
+                        <td colspan="2">
+                            <a href='@routes.Application.editerCompetence(c.getId())'>
+                                <button class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-pencil"></span> Editer cette compétence
+                                </button>
+                            </a>
+                            <a href='@routes.Application.supprimerCompetence(c.getId())'>
+                                <button class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span> Supprimer cette compétence
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        <script src='@routes.Assets.at("javascripts/detailsTabs.js")'></script>
+}
